@@ -705,8 +705,8 @@
       function initFurioos() {
         let player = new Player(getSharedLinkId(), adContainerId, furioosOptions);
         player.onSDKMessage( (data) => {
-          console.log(`Message is ${e.data}`);
-          if (e.data == "CTA") {
+          console.log(`Message is ${data}`);
+          if (data == "CTA") {
             mraid.open(appUrl);
           }
         } );
