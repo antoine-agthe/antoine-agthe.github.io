@@ -668,15 +668,22 @@
 
       // Gets the proper link depending on the hostname 
       function getSharedLinkId() {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+        
+        if('wildcard' in params)
+        {
+          return "191.872";
+        }
+        
         let hostname = window.location.hostname;
 
         switch(hostname) {
           case "localhost": return "563.107";
           case "dashboards-advertiser-assets-prd.storage.googleapis.com": return "649.178";
           case "antoine-agthe.github.io": return "130.712";
-          case "cdn-creatives-prd.unityads.unity3d.com":
-          default:
-            return "091.273";
+          case "cdn-creatives-prd.unityads.unity3d.com": return "091.273";
+          default: return "191.872";
         }
       }
     
