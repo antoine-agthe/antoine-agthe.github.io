@@ -1,11 +1,10 @@
 <html>
-
   <head>
     <meta charset="UTF-8">
     <title>Trash Dash powered by Furioos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <script src="mraid.js"></script>
 
     <!-- Furioos SDK -->
@@ -686,7 +685,7 @@
             return "https://play.google.com/store/apps/details?id=com.unity.trashdash";
           case OperatingSystem.UNKNOWN:
           case OperatingSystem.IOS:
-            return "https://apps.apple.com/tt/app/trash-dash-endless-runner/id1535215140";
+            return "https://apps.apple.com/ca/app/angry-bots/id453467175";
         }
       };
 
@@ -695,7 +694,7 @@
         player.onSDKMessage( (data) => {
           console.log(`Message is ${data}`);
           if (data == "CTA") {
-            mraid.open(appUrl);
+            mraid.open(getAppUrl());
           }
         } );
       }
@@ -717,10 +716,13 @@
         else {
             initFurioos();
         }
-    }
+      }
+
+      body_load_handler();
+
     </script>
   </head>
-  <body onload="body_load_handler()" style="margin: 0; padding: 0; width: 100vw; height: 100vh">
+  <body style="margin: 0; padding: 0; width: 100vw; height: 100vh">
     <div id="adContainer" style="border: none; height: 100vh; width: 100vw"></div>
   </body>
 </html>
