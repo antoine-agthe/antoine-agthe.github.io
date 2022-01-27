@@ -8,13 +8,16 @@
             video.playsinline = true;
             video.muted = true;
             video.autoplay = true;
-            video.controls = true;
 
             video.style.width = '200';
             video.style.height = '100';
             video.style.margin = 'none';
             video.style.padding = 'none';
             video.style.border = 'none';
+            
+            video.onplay = function() {
+                video.muted = false;
+            }
 
             document.getElementById('video-container').appendChild(video);
         }
