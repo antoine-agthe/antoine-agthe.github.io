@@ -8,17 +8,19 @@
             video.playsinline = true;
             video.muted = true;
             video.autoplay = true;
+            video.controls = true;
 
-            video.style.height = '100vh';
-            video.style.width = '19%';
+            video.style.width = '200';
+            video.style.height = '100';
             video.style.margin = 'none';
             video.style.padding = 'none';
             video.style.border = 'none';
 
-            document.body.appendChild(video);
+            document.getElementById('video-container').appendChild(video);
         }
     </script>
     <button onclick="createVideo()">Create video</button>
+        <div id=video-"container">
     <video >
 </body>
 </html>
