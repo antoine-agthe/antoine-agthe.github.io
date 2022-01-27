@@ -1,5 +1,4 @@
 <html>
-
   <head>
     <meta charset="UTF-8">
     <title>Trash Dash powered by Furioos</title>
@@ -240,9 +239,12 @@
           iframe.setAttribute("src", this.sharedLink);
           iframe.setAttribute("id", "furioos-sdk-iframe");
           iframe.setAttribute("allow", "autoplay; fullscreen");
-    
+
           iframe.style.width = "100%";
           iframe.style.height = "100%";
+          iframe.style.padding = "0";
+          iframe.style.margin = "0";
+          iframe.style.border = "none";
     
           container.appendChild(iframe);
           iframe.onload = this._onLoad.bind(this);
@@ -648,6 +650,15 @@
     <!-- App -->
     <script>
 
+      function log(text) {
+          const container = document.getElementById("app-debug");
+
+          if(container != null)
+          {
+              container.innerHTML += "<p>" + text + "</p>";
+          }
+      }
+
       const OperatingSystem = {
         ANDROID: "android",
         IOS: "ios",
@@ -667,26 +678,7 @@
       };
 
       // Gets the proper link depending on the hostname 
-      function getSharedLinkId() {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = Object.fromEntries(urlSearchParams.entries());
-        
-        if('wildcard' in params)
-        {
-          return "191.872";
-        }
-        
-        let hostname = window.location.hostname;
-
-        switch(hostname) {
-          case "localhost": return "563.107";
-          case "dashboards-advertiser-assets-prd.storage.googleapis.com": return "649.178";
-          case "antoine-agthe.github.io": return "130.712";
-          case "cdn-creatives-prd.unityads.unity3d.com": return "091.273";
-          default: return "191.872";
-        }
-      }
-    
+      function getSharedLinkId() { return "191.872"; }    
 
       function getOs() {
         let userAgent = window.navigator.userAgent.toLowerCase(),
@@ -705,41 +697,72 @@
             return "https://play.google.com/store/apps/details?id=com.unity.trashdash";
           case OperatingSystem.UNKNOWN:
           case OperatingSystem.IOS:
-            return "https://apps.apple.com/tt/app/trash-dash-endless-runner/id1535215140";
+            return "https://apps.apple.com/ca/app/angry-bots/id453467175";
         }
       };
 
       function initFurioos() {
+        log("Initializing furioos");
         let player = new Player(getSharedLinkId(), adContainerId, furioosOptions);
         player.onSDKMessage( (data) => {
           console.log(`Message is ${data}`);
           if (data == "CTA") {
-            mraid.open(appUrl);
+            mraid.open(getAppUrl());
           }
         } );
       }
 
       function mraid_ready_handler() {
-        mraid.removeEventListener("ready", mraid_ready_handler);
+        mraid.removeEventListener('ready', mraid_ready_handler);
 
-        // avoid ad tester warnings
-        mraid.addEventListener("viewableChange", (visible) => console.log(`MRAID is now ${visible ? 'visible' : 'invisible'}`));
-        mraid.addEventListener("orientationChange", (orientation) => console.log(`MRAID orientation is now ${orientation}`));
+        mraid.addEventListener("orientationChange", (orientation) => log(`MRAID orientation is now ${orientation}`));
 
-        initFurioos();
+        // if(mraid.isViewable()) {
+             initFurioos();
+        // }
+        // else
+        // {
+             mraid.addEventListener("viewableChange", mraid_viewableChange_handler);
+        // }
       }
 
-      function body_load_handler() {
-        if (window.mraid && mraid.getState() == 'loading') {
-          mraid.addEventListener("ready", mraid_ready_handler);
+      function mraid_viewableChange_handler(visible)
+      {
+        log(`MRAID is now ${visible ? 'visible' : 'invisible'}`);
+        // if(visible)
+        // {
+        //     mraid.removeEventListener("viewableChange", mraid_viewableChange_handler);
+        //     initFurioos();
+        // }
+      }
+  </script>
+  </head>
+  <body style="border:none;margin:0;padding:0;width:100vw;height:100vh">
+    <div id="adContainer" style="border:none;margin:0;padding:0;height:100vh;width:100vw">
+        <!-- <div id="app-debug" style="background-color:white"></div> -->
+    </div>
+    <script>
+        if (window.mraid)
+        {
+            var state = mraid.getState();
+            log('MRAID state is ' + state);
+            
+            mraid.addEventListener('stateChange', (newState) => log('MRAID state change to ' + newState));
+
+            switch(state)
+            {
+                case 'loading':
+                    mraid.addEventListener('ready', mraid_ready_handler);
+                    break;
+                case 'ready':
+                    mraid_ready_handler();
+                    break;
+            }
         }
-        else {
+        else {            
+            log("MRAID not found");
             initFurioos();
         }
-    }
     </script>
-  </head>
-  <body onload="body_load_handler()" style="margin: 0; padding: 0; width: 100vw; height: 100vh">
-    <div id="adContainer" style="border: none; height: 100vh; width: 100vw"></div>
   </body>
 </html>
