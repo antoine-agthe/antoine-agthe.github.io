@@ -1,22 +1,24 @@
 <html>
-  <body>
+    <body>
     <script>
-      function createVideo() {
-        const video = document.createElement('video');
-        video.src = 'https://dashboards-advertiser-assets-prd.storage.googleapis.com/assets/61e85e4f9e3523a2db42e255/H264_high.mp4';
-        video.poster = 'https://cdn-store-icons-prd.unityads.unity3d.com/store-icons/d4015133-e0d4-4e26-bd3e-ea7c2aaae381.png';
-        video.playsinline = true;
+        function createVideo() {
+            const video = document.createElement('video');
+            video.src = 'https://dashboards-advertiser-assets-prd.storage.googleapis.com/assets/61e85e4f9e3523a2db42e255/H264_high.mp4';
+            video.poster = 'https://cdn-store-icons-prd.unityads.unity3d.com/store-icons/d4015133-e0d4-4e26-bd3e-ea7c2aaae381.png';
+            video.playsinline = true;
+            video.muted = true;
+            video.autoplay = true;
 
-        video.style.height = '100vh';
-        video.style.width = '49%';
-        video.style.margin = 'none';
-        video.style.padding = 'none';
-        video.style.border = 'none';
+            video.style.height = '100vh';
+            video.style.width = '19%';
+            video.style.margin = 'none';
+            video.style.padding = 'none';
+            video.style.border = 'none';
 
-        document.body.appendChild(video);
-        video.play();
-      }
+            document.body.appendChild(video);
+        }
     </script>
     <button onclick="createVideo()">Create video</button>
-  </body>
+    <video >
+</body>
 </html>
