@@ -1,0 +1,25 @@
+<html>
+    <script src="furioos-sdk.js"></script>
+    <body style="border: none; padding: none; margin: none">
+        <script>
+            const options = {
+                whiteLabel: true,
+                hideToolbar: false,
+                hideTitle: true,
+                hidePlayButton: true
+            };
+
+            const containerId = "furioos-container";
+            const shareLinkId = "HAkS5TeHax7dBxfZM";
+
+            const player = new Player(shareLinkId, containerId, options);
+
+            player.onSDKMessage( (data) => {
+                console.log(`Message is ${data}`);
+                if (data == "CTA") {
+                  mraid.open(getAppUrl());
+                }
+            } );
+        </script>
+    </body>
+</html>
