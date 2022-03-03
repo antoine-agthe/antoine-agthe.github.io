@@ -16,6 +16,7 @@
             const player = new Player(shareLinkId, containerId, options);
 
             player.onSDKMessage( (data) => {
+                console.log(`SDK MESSAGE: ${data}`);
                 parent.postMessage(data, "*");
             } );
         </script>
