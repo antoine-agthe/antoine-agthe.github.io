@@ -1,4 +1,4 @@
-module.exports = class SDKDebug {
+class SDKDebug {
   constructor(localServerAddress) {
     if (!localServerAddress) {
       throw "Bad parameters";
@@ -70,7 +70,7 @@ module.exports = class SDKDebug {
 
     this.ws.send(JSON.stringify(parsedData), this._wsOnSendError);
   }
-};
+}
 
 
 const _constructorParams = function (shareId, containerId, options) {
@@ -131,7 +131,7 @@ const _regions = {
 
 let _furioosServerUrl = "https://portal.furioos.com";
 
-module.exports = class Player {
+class Player {
   static get qualityValues() {
     return _qualityValues;
   }
@@ -691,4 +691,4 @@ module.exports = class Player {
     );
     // The response will be treat in the listener below.
   }
-};
+}
