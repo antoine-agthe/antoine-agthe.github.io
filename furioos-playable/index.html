@@ -3,6 +3,16 @@
     <body style="border: none; padding: none; margin: none">
         <div id="furioos-container" style="border: none; padding: none; margin: none; width: 100wv; height: 100hv"></div>
         <script>
+
+            var ancestors = window.location.ancestorOrigins;
+            console.log(`${ancestors.length} ancestors`);
+            for(var i = 0; i < ancestors.length; i++) {
+                console.log(`Index: ancestor #${i}: ${ancestors[i]}`);
+            }
+
+            console.log(`Index: parent is ${parent}`);
+            console.log(`Index: window.parent is ${window.parent}`);
+
             const options = {
                 whiteLabel: true,
                 hideToolbar: false,
