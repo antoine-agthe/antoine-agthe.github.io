@@ -4,16 +4,28 @@
         </iframe>
         <script>
 
-            console.log(`[Index-Alt] Referrer: ${window.referrer}`);
-            console.log(`[Index-Alt] Location Href: ${window.location.href}`);
+            function debugIFrame(name) {
+                console.log(`[${name}] Referrer: ${window.referrer}`);
+                console.log(`[${name}] Location Href: ${window.location.href}`);
 
-            if (window.location.ancestorOrigins) {
-                var ancestors = window.location.ancestorOrigins;
-                console.log(`${ancestors.length} ancestors`);
-                for(var i = 0; i < ancestors.length; i++) {
-                    console.log(`[Index-Alt] ancestor #${i}: ${ancestors[i]}`);
+                try {
+                    if(window.parent) {
+                        console.log(`[${name}] Parent: ${window.parent.location.href}`);
+                    }
+                }
+                catch(e) {
+
+                }
+
+                if (window.location.ancestorOrigins) {
+                    var ancestors = window.location.ancestorOrigins;
+                    for(var i = 0; i < ancestors.length; i++) {
+                        console.log(`[${name}] ancestor #${i}: ${ancestors[i]}`);
+                    }
                 }
             }
+
+            debugIFrame("Index-Alt");
 
         </script>
     </body>

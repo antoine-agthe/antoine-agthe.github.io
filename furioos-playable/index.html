@@ -4,16 +4,28 @@
         <div id="furioos-container" style="border: none; padding: none; margin: none; width: 100wv; height: 100hv"></div>
         <script>
 
-            console.log(`[Index] Referrer: ${window.referrer}`);
-            console.log(`[Index] Location Href: ${window.location.href}`);
+function debugIFrame(name) {
+                console.log(`[${name}] Referrer: ${window.referrer}`);
+                console.log(`[${name}] Location Href: ${window.location.href}`);
 
-            if (window.location.ancestorOrigins) {
-                var ancestors = window.location.ancestorOrigins;
-                console.log(`${ancestors.length} ancestors`);
-                for(var i = 0; i < ancestors.length; i++) {
-                    console.log(`[Index] ancestor #${i}: ${ancestors[i]}`);
+                try {
+                    if(window.parent) {
+                        console.log(`[${name}] Parent: ${window.parent.location.href}`);
+                    }
+                }
+                catch(e) {
+
+                }
+
+                if (window.location.ancestorOrigins) {
+                    var ancestors = window.location.ancestorOrigins;
+                    for(var i = 0; i < ancestors.length; i++) {
+                        console.log(`[${name}] ancestor #${i}: ${ancestors[i]}`);
+                    }
                 }
             }
+
+            debugIFrame("Index");
 
             const options = {
                 whiteLabel: true,
