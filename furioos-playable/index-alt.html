@@ -1,0 +1,20 @@
+<html>
+    <body style="border: none; padding: none; margin: none">
+        <iframe id="iframe-index" style="width: 100vw; height: 100vh; border: nine; padding: none; margin: none" src="index.html">
+        </iframe>
+        <script>
+
+            console.log(`[Index-Alt] Referrer: ${window.referrer}`);
+            console.log(`[Index-Alt] Location Href: ${window.location.href}`);
+
+            if (window.location.ancestorOrigins) {
+                var ancestors = window.location.ancestorOrigins;
+                console.log(`${ancestors.length} ancestors`);
+                for(var i = 0; i < ancestors.length; i++) {
+                    console.log(`[Index-Alt] ancestor #${i}: ${ancestors[i]}`);
+                }
+            }
+
+        </script>
+    </body>
+</html>
