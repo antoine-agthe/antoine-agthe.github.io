@@ -4,10 +4,15 @@
         <div id="furioos-container" style="border: none; padding: none; margin: none; width: 100wv; height: 100hv"></div>
         <script>
 
-            var ancestors = window.location.ancestorOrigins;
-            console.log(`${ancestors.length} ancestors`);
-            for(var i = 0; i < ancestors.length; i++) {
-                console.log(`Index: ancestor #${i}: ${ancestors[i]}`);
+            console.log(`[Index] Referrer: ${window.referrer}`);
+            console.log(`[Index] Location Href: ${window.location.href}`);
+
+            if (window.location.ancestorOrigins) {
+                var ancestors = window.location.ancestorOrigins;
+                console.log(`${ancestors.length} ancestors`);
+                for(var i = 0; i < ancestors.length; i++) {
+                    console.log(`[Index] ancestor #${i}: ${ancestors[i]}`);
+                }
             }
 
             const options = {
