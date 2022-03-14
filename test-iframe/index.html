@@ -1,0 +1,34 @@
+<html>
+  <body>
+    <iframe
+            id="iframe-child"
+            style="border: none; margin: none; padding: none; width: 200px; height: 200px"
+            src="https://antoine-agthe-unity.github.io/test-iframe/index.html">
+    </iframe>
+    <div id="console" style="width: 200px; height: 200px"></div>
+    <script>
+
+      function log(message) {
+        var div = document.getElementById("console");
+        div.innerHTML = `<p>${message}</p>${div.innerHTML}`;
+      }
+      
+      function receiveMessage(e) {
+        var message = `FROM: ${e.origin}: ${e.data}`;
+        log(message);
+      }
+      
+      var iframe = document.getElementById("iframe-child");
+      var messsageId = 0;
+      
+      function sendMessage() {
+        var message = `Hello fromn parent #${messageId++}`;
+        iframe.postMessage(message, "https://antoine-agthe-unity.github.io");
+      }
+            
+      window.addEventListener("message", receiveMessage, false);
+      
+      setInterval(sendMessage, 1000);
+    </script>
+  </body>
+</html>
