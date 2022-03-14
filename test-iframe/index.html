@@ -23,7 +23,7 @@
       
       function sendMessage() {
         var message = `Hello fromn parent #${messageId++}`;
-        iframe.postMessage(message, "https://antoine-agthe-unity.github.io");
+        iframe.contentWindow.postMessage(message, "https://antoine-agthe-unity.github.io");
       }
             
       window.addEventListener("message", receiveMessage, false);
