@@ -23,8 +23,12 @@
       
       function sendMessage() {
         console.log(`Try to send message ${messageId} to child ${iframe.contentWindow != null}`);
+
         var message = `Hello from parent #${messageId++}`;
         iframe.contentWindow.postMessage(message, "https://antoine-agthe-unity.github.io");
+        
+        message = `Hello from parent using * #${messageId++}`;
+        iframe.contentWindow.postMessage(message, "*");
       }
             
       window.addEventListener("message", receiveMessage, false);
