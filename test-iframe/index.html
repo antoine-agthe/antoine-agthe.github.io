@@ -22,6 +22,7 @@
       var messageId = 0;
       
       function sendMessage() {
+        console.log(`Try to send message ${messageId} to child ${iframe.contentWindow}`);
         var message = `Hello from parent #${messageId++}`;
         iframe.contentWindow.postMessage(message, "https://antoine-agthe-unity.github.io");
       }
