@@ -22,7 +22,7 @@
       var messageId = 0;
       
       function sendMessage() {
-        var message = `Hello fromn parent #${messageId++}`;
+        var message = `Hello from parent #${messageId++}`;
         iframe.contentWindow.postMessage(message, "https://antoine-agthe-unity.github.io");
       }
             
