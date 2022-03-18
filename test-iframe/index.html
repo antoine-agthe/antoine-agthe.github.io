@@ -14,9 +14,15 @@
       }
       
       function receiveMessage(e) {
-        console.log(e);
-        var message = `ORIGIN: ${e.origin}, SOURCE: ${e.source}, DATA: ${e.data}`;
-        log(message);
+        console.log({origin: location.origin, message: e});
+
+        try {
+          var message = `ORIGIN: ${e.origin}, SOURCE: ${e.source}, DATA: ${e.data}`;
+          log(message);
+        }
+        catch (error) {
+          log(error);
+        }
       }
       
       var iframe = document.getElementById("iframe-child");
@@ -43,7 +49,7 @@
         console.log(iframe.location);
       }
       catch (e) {
-        console.error(e);
+        console.error({origin: location.origin, error: e});
       }      
     </script>
   </body>
