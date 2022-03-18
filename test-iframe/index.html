@@ -8,21 +8,26 @@
     <div id="console" style="width: 40vw; height: 100vh; float: left"></div>
     <script>
 
+      var iframe = document.getElementById("iframe-child");
+      var messageId = 0;
+      
       function log(message) {
         var div = document.getElementById("console");
         div.innerHTML = `<p>${message}</p>${div.innerHTML}`;
       }
       
       function receiveMessage(message) {
-        console.log({origin: location.origin, message: message});        
+        console.log({origin: location.origin, message: message});
         log(message.data);
+        
+        if(message.source == iframe) {
+          console.log("message source is child");
+        }
       }
       
-      var iframe = document.getElementById("iframe-child");
-      var messageId = 0;
       
       function sendMessage() {
-        console.log(`Try to send message ${messageId} to child ${iframe.contentWindow != null}`);
+        console.log(`Try to send message ${messageId} to child`);
 
         var message = `Hello from parent #${messageId++}`;
         iframe.contentWindow.postMessage(message, "https://antoine-agthe-unity.github.io");
